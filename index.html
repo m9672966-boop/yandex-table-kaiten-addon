@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yandex Table Opener - Kaiten Addon</title>
+    <script src="https://files.kaiten.ru/web-sdk/v1.min.js"></script>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: #f5f5f5;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 400px;
+            margin: 50px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        h2 {
+            color: #333;
+            margin-bottom: 15px;
+        }
+        .description {
+            color: #666;
+            margin-bottom: 25px;
+            line-height: 1.6;
+        }
+        .open-btn {
+            background: linear-gradient(135deg, #ffcc00, #ffdb4d);
+            color: #000;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            width: 100%;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 10px rgba(255, 204, 0, 0.3);
+        }
+        .open-btn:hover {
+            background: linear-gradient(135deg, #e6b800, #ffcc00);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(255, 204, 0, 0.4);
+        }
+        .open-btn:active {
+            transform: translateY(0);
+        }
+        .icon {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="icon">📊</div>
+        <h2>Открыть Яндекс таблицу</h2>
+        <p class="description">Нажмите кнопку ниже чтобы открыть Яндекс таблицу в новой вкладке браузера</p>
+        
+        <button class="open-btn" onclick="openYandexTable()">
+            📋 Открыть таблицу
+        </button>
+    </div>
+
+    <script>
+        function openYandexTable() {
+            // Открываем Яндекс таблицу в новой вкладке
+            const tableUrl = 'https://disk.360.yandex.ru/i/qfeZ0bN4w7zDqw';
+            window.open(tableUrl, '_blank');
+            
+            // Уведомление через Kaiten SDK
+            try {
+                if (window.Kaiten && window.Kaiten.sdk) {
+                    window.Kaiten.sdk.toast.success('Яндекс таблица открывается...');
+                }
+            } catch (error) {
+                console.log('Kaiten SDK не доступен');
+            }
+        }
+
+        // Инициализация дополнения
+        document.addEventListener('DOMContentLoaded', function() {
+            try {
+                if (window.Kaiten && window.Kaiten.sdk) {
+                    window.Kaiten.sdk.ready();
+                    console.log('Kaiten addon initialized successfully');
+                }
+            } catch (error) {
+                console.log('Kaiten SDK not available:', error);
+            }
+        });
+    </script>
+</body>
+</html>
